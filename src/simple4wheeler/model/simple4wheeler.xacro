@@ -1,0 +1,346 @@
+<robot name="simple4wheeler" xmlns:xacro = "http://www.ros.org/wiki/xacro">
+    <xacro:property name="pii" value="3.142" />
+
+    <link name="map">
+    </link>
+
+    <link name ="link_chasis">
+        <!--Pose x, y, z, roll, pitch, yaw-->
+        <pose> 0 0 0.1 0 0 0 </pose>
+        <inertial>
+            <mass value="50"/>
+            <origin rpy="0 0 0" xyz=" 0 0 0.1" />
+            <inertia ixx="0.03954"
+                     ixy="0"
+                     ixz="0"
+                     iyy="0.10620"
+                     iyz="0"
+                     izz="0.10620" />
+        </inertial>
+
+        <collision name="collision_chasis">
+            <geometry>
+                <box size="0.5 0.3 0.07"/>
+            </geometry>
+        </collision>
+        <visual>
+            <geometry>
+                <box size="0.5 0.3 0.07"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="joint_map" type="fixed">
+        <parent link="map"/>
+        <child link="link_chasis"/>
+    </joint>
+<link name = "link_right_back_wheel">
+        <inertial>
+            <mass value = "5"/>
+            <origin rpy = "0 0 0" xyz = "0 0 0.1"/>
+            <inertia ixx = "0.03954"
+                 ixy = "0"
+                 ixz = "0"
+                 iyy = "0.10620"
+                 iyz = "0"
+                 izz = "0.10620"/>
+        </inertial>
+        <collision name = "collision_right_back_wheel">
+            <geometry>
+                <cylinder length = "0.04" radius = "0.1"/>
+            </geometry>
+        </collision>
+        
+        <visual name = "visual_right_back_wheel">
+            <geometry>
+                <cylinder length = "0.04" radius = "0.1"/>
+            </geometry>
+        </visual>
+</link>
+    <joint name = "joint_right_back_wheel" type = "continuous">
+        <origin rpy = "1.57 1.57 0" xyz = "0.25 0.15 0"/>
+        <parent link = "link_chasis"/>
+        <child link = "link_right_back_wheel"/>
+        <axis rpy = "0 0 0" xyz = "0 0 1"/>
+        <limit effort = "10" velocity = "10"/>
+        <joint_properties damping = "1.0" friction = "1.0"/>
+    </joint>
+    <link name = "link_left_back_wheel">
+        <inertial>
+            <mass value = "5"/>
+            <origin rpy = "0 0 0" xyz = "0 0 0.1"/>
+            <inertia ixx = "0.03954"
+                 ixy = "0"
+                 ixz = "0"
+                 iyy = "0.10620"
+                 iyz = "0"
+                 izz = "0.10620"/>
+        </inertial>
+        <collision name = "collision_left_back_wheel">
+            <geometry>
+                <cylinder length = "0.04" radius = "0.1"/>
+            </geometry>
+        </collision>
+        
+        <visual name = "visual_left_back_wheel">
+            <geometry>
+                <cylinder length = "0.04" radius = "0.1"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name = "joint_left_back_wheel" type = "continuous">
+        <origin rpy = "1.57 1.57 0" xyz = "0.25 -0.15 0"/>
+        <parent link = "link_chasis"/>
+        <child link = "link_left_back_wheel"/>
+        <axis rpy = "0 0 0" xyz = "0 0 1"/>
+        <limit effort = "10" velocity = "10"/>
+        <joint_properties damping = "1.0" friction = "1.0"/>
+    </joint>
+
+
+    <link name = "link_right_front_wheel">
+        <inertial>
+            <mass value = "5"/>
+            <origin rpy = "0 0 0" xyz = "0 0 0.1"/>
+            <inertia ixx = "0.03954"
+                 ixy = "0"
+                 ixz = "0"
+                 iyy = "0.10620"
+                 iyz = "0"
+                 izz = "0.10620"/>
+        </inertial>
+        <collision name = "collision_right_front_wheel">
+            <geometry>
+                <cylinder length = "0.04" radius = "0.1"/>
+            </geometry>
+        </collision>
+        
+        <visual name = "visual_right_front_wheel">
+            <geometry>
+                <cylinder length = "0.04" radius = "0.1"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name = "joint_right_front_wheel" type = "continuous">
+        <origin rpy = "1.57 1.57 0" xyz = "-0.25 0.15 0"/>
+        <parent link = "link_chasis"/>
+        <child link = "link_right_front_wheel"/>
+        <axis rpy = "0 0 0" xyz = "0 0 1"/>
+        <limit effort = "10" velocity = "10"/>
+        <joint_properties damping = "1.0" friction = "1.0"/>
+    </joint>
+    <link name = "link_left_front_wheel">
+        <inertial>
+            <mass value = "5"/>
+            <origin rpy = "0 0 0" xyz = "0 0 0.1"/>
+            <inertia ixx = "0.03954"
+                 ixy = "0"
+                 ixz = "0"
+                 iyy = "0.10620"
+                 iyz = "0"
+                 izz = "0.10620"/>
+        </inertial>
+        <collision name = "collision_left_front_wheel">
+            <geometry>
+                <cylinder length = "0.04" radius = "0.1"/>
+            </geometry>
+        </collision>
+        
+        <visual name = "visual_left_front_wheel">
+            <geometry>
+                <cylinder length = "0.04" radius = "0.1"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name = "joint_left_front_wheel" type = "continuous">
+        <origin rpy = "1.57 1.57 0" xyz = "-0.25 -0.15 0"/>
+        <parent link = "link_chasis"/>
+        <child link = "link_left_front_wheel"/>
+        <axis rpy = "0 0 0" xyz = "0 0 1"/>
+        <limit effort = "10" velocity = "10"/>
+        <joint_properties damping = "1.0" friction = "1.0"/>
+    </joint>
+
+
+    <link name="link_lidar">
+        <inertial>
+            <mass value="0.05"/>
+            <inertia
+                ixx = "0.00001"
+                ixy = "0"
+                ixz = "0"
+                iyy = "0.00001"
+                iyz = "0"
+                izz = "0.00001" />
+        </inertial>
+
+        <visual>
+            <geometry>
+                <mesh filename="file://package://simple4wheeler/mesh/rplidar_a2_simple.stl" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.07 0.07 0.07"/>
+            </geometry>
+        </collision>
+    </link>
+    <joint name="joint_lidar" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0.07"/>
+        <parent link="link_chasis" />
+        <child link="link_lidar" />
+    </joint>
+
+    <gazebo reference="link_lidar">
+        <sensor type="ray" name="sensor_lidar">
+            <update_rate> 10 </update_rate>
+            <visualize> true </visualize>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples> 400 </samples>
+                        <min_angle> -3.142 </min_angle>
+                        <max_angle> 3.142 </max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples> 1 </samples>
+                        <min_angle> -0.05 </min_angle>
+                        <max_angle> 0.05 </max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min> 0.15 </min>
+                    <max> 12 </max>
+                    <resolution> 0.01 </resolution>
+                </range>
+            </ray>
+            <plugin name="gazebo_ros_lidar" filename="libgazebo_ros_laser.so">
+                <gaussianNoise> 0.01 </gaussianNoise>
+                <updateRate> 10 </updateRate>
+                <topicName> lidar </topicName>
+                <minRange> 0.15 </minRange>
+                <maxRange> 12 </maxRange>
+                <frameName> link_lidar </frameName>     
+            </plugin>
+        </sensor>   
+</gazebo>
+
+
+<link name="link_camera">
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+        </inertial>
+        <visual>
+           <geometry>
+                <box size="0.03 0.03 0.02"/>
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.032 0.032 0.04"/>
+            </geometry>
+        </collision>
+    </link>
+    <joint name="joint_camera" type="fixed">
+        <origin rpy="0 0 0" xyz="0.21 0 0.045" />
+        <parent link="link_chasis"/>
+        <child link="link_camera"/>
+    </joint>
+<link name="link_ultrasonic">
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+        </inertial>
+        <visual>
+             <geometry>
+                <box size="0.017 0.07 0.03"/>
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.02 0.08 0.05"/>
+            </geometry>
+        </collision>
+    </link>
+    <joint name="joint_ultrasonic" type="fixed">
+        <origin rpy="0 0 0" xyz="0.22 0.07 0.058" />
+        <parent link="link_chasis"/>
+        <child link="link_ultrasonic"/>
+    </joint>
+    <gazebo reference="link_ultrasonic">
+        <sensor name="ultrasonic" type="ray">
+            <update_rate>10</update_rate>
+            <visualize>true</visualize>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>400</samples>
+                        <min_angle>-0.25</min_angle>
+                        <max_angle>0.2</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>1</samples>
+                        <min_angle>-0.05</min_angle>
+                        <max_angle>0.05</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.15</min>
+                    <max>12</max>
+                    <resolution>0.01</resolution>
+                </range>
+            </ray>
+            <plugin name="gazebo_ros_ultrasonic" filename="libgazebo_ros_range.so">
+                <gaussianNoise>0.01</gaussianNoise>
+                <updateRate>10</updateRate>
+                <topicName>ultrasonic</topicName>
+                <minRange>0.15</minRange>
+                <maxRange>12</maxRange>
+                <frameName>link_ultrasonic</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+    <gazebo reference="link_camera">
+  <sensor type="camera" name="camera_sensor">
+    <update_rate>30.0</update_rate>
+    <camera name="head_camera">
+      <horizontal_fov>1.3962634</horizontal_fov>
+      <image>
+        <width>800</width>
+        <height>800</height>
+        <format>R8G8B8</format>
+      </image>
+      <clip>
+        <near>0.02</near>
+        <far>300</far>
+      </clip>
+    </camera>
+    <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+      <gaussianNoise>0.01</gaussianNoise>
+    <updateRate>10</updateRate>
+    <topicName>camera_image</topicName>
+    <minRange>0.15</minRange>
+    <maxRange>12</maxRange>
+    <frameName>link_camera</frameName>
+
+    </plugin>
+  </sensor>
+</gazebo>
+<gazebo>
+  <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+                <updateRate>100.0</updateRate>
+                <robotNamespace>/</robotNamespace>
+                <leftFrontJoint>joint_left_front_wheel</leftFrontJoint>
+                <rightFrontJoint>joint_right_front_wheel</rightFrontJoint>
+                <leftRearJoint>joint_left_back_wheel</leftRearJoint>
+                <rightRearJoint>joint_right_back_wheel</rightRearJoint>
+                <wheelSeparation>0.4</wheelSeparation>
+                <wheelDiameter>0.2</wheelDiameter>
+                <robotBaseFrame>base_link</robotBaseFrame>
+                <torque>50</torque>
+                <topicName>cmd_vel</topicName>
+                <broadcastTF>false</broadcastTF>
+            </plugin>
+</gazebo>
+</robot>

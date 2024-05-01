@@ -1,0 +1,31 @@
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="true" />
+        <arg name="world_name" value="$(find simple4wheeler)/world/our_world.world"/>
+    </include>
+
+    <param name="robot_description"
+            command="$(find xacro)/xacro
+            '$(find simple4wheeler)/model/simple4wheeler.xacro'"/>
+
+    <node name="spawn_urdf"
+          pkg = "gazebo_ros"
+          type="spawn_model"
+          args="-param robot_description -urdf -model simple4wheeler"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" >
+    </node>
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="use_gui" value="false"/>
+    </node>
+
+    
+
+    <node name="cmd_vel" pkg="turtlesim" type="turtle_teleop_key" >
+        <remap from="/turtle1/cmd_vel" to="cmd_vel" />
+    </node>
+
+    <node name="robot_controller" pkg="simple4wheeler" type="robot_move.py" output="screen">
+    </node>
+</launch>   
